@@ -12,7 +12,7 @@ class AIClient:
     """Adaptador para procesar y resumir noticias usando IA con Structured Outputs."""
 
     def __init__(self):
-        # 1. Inicializamos el cliente de OpenAI (o cualquier provider en 2026)
+        # 1. Inicializamos el cliente de OpenAI
         # 2. Lo "parcheamos" con Instructor para manejar Pydantic
         self.client = instructor.from_openai(
             OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -21,7 +21,6 @@ class AIClient:
     def resumir_noticia(self, titulo_original: str, fuente: str) -> Noticia:
         """Usa la IA para generar un resumen estructurado basado en un título."""
 
-        # En 2026, el prompt es el 'contrato' de la tarea
         return self.client.chat.completions.create(
             model="gpt-4o-mini",  # O el modelo que prefieras
             response_model=Noticia,  # <--- La magia de Instructor: valida contra Pydantic
